@@ -5,6 +5,8 @@
  *  Author: makoto
  */ 
 
+//“Á‚É‚¢‚¶‚ç‚È‚¢‚Å‚­‚¾‚³‚¢
+
 #ifndef F_CPU
 	#define F_CPU 16000000UL
 #endif
@@ -51,4 +53,14 @@ void sw_reset_menu(void)
 	strcpy_P(msg,_mes_sw_menu_1_ok);
 	lcd_put_data(1,msg);
 	_exit_flag = 1;
+}
+
+ISR(PCINT1_vect)
+{
+	uint8_t sreg;
+	sreg = SREG;
+	_delay_ms(1);
+	sw_reset_menu();
+	sei();
+	SREG = sreg;
 }

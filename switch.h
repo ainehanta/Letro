@@ -5,6 +5,7 @@
  *  Author: makoto
  */ 
 
+//“Á‚É‚¢‚¶‚ç‚È‚¢‚Å‚­‚¾‚³‚¢
 
 #ifndef SWITCH_H_
 #define SWITCH_H_

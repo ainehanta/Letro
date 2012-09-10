@@ -10,9 +10,9 @@
 #define APP_H_
 
 
-void demo(void);
+void app_demo(void);
 
-void test(void);
+void app_sound(void);
 
 
 #endif /* APP_H_ */

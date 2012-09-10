@@ -5,6 +5,8 @@
  *  Author: makoto
  */ 
 
+//“Á‚É‚¢‚¶‚ç‚È‚¢‚Å‚­‚¾‚³‚¢
+
 
 #ifndef SWRESET_H_
 #define SWRESET_H_

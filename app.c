@@ -5,6 +5,13 @@
  *  Author: makoto
  */ 
 
+/*
+
+	このファイルとヘッダに組み込むアプリケーションを
+	「app_"アプリケーション名"」の形で記述していってください。
+
+*/
+
 #ifndef F_CPU
 	#define F_CPU 16000000UL
 #endif
@@ -17,14 +24,11 @@
 #include "lcd.h"
 #include "led.h"
 #include "switch.h"
-#include "sound.h"
 
 extern uint8_t _exit_flag;
 
-void demo(void)
-{
-	sw_reset_enable();
-	
+void app_demo(void)
+{	
 	lcd_put_data(0,"Running Demo... ");
 	lcd_put_data(1,"                ");
 	
@@ -134,7 +138,61 @@ void demo(void)
 	}
 }
 
-void test(void)
+void app_sound(void)
 {
+	//飽きた…
 	
+	//switch_state switch_state_p0;
+	//switch_state_clear(&switch_state_p0);
+	//switch_state switch_state_p1;
+	//switch_state_clear(&switch_state_p1);
+	//
+	//lcd_put_data(0,"Sound Test      ");
+	//lcd_put_data(1,"                ");
+	//
+	//for(;;)
+	//{
+		//switch_get(SWITCH_CONT_P0,&switch_state_p0);
+		//if((switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0))
+		//{
+			//sound_set(SOUND_A,1);
+		//}
+		//else if((switch_state_p0.switch_b==1)&&(switch_state_p0.switch_prev_b==0))
+		//{
+		//}
+//
+		//if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0))
+		//{
+		//}
+		//else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0))
+		//{
+		//}
+		//else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0))
+		//{
+		//}
+		//else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0))
+		//{
+		//}
+//
+		//switch_get(SWITCH_CONT_P1,&switch_state_p1);
+		//if((switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0))
+		//{
+		//}
+		//else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0))
+		//{
+		//}
+//
+		//if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0))
+		//{
+		//}
+		//else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0))
+		//{
+		//}
+		//else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0))
+		//{
+		//}
+		//else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0))
+		//{
+		//}
+	//}
 }

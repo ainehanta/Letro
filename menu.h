@@ -9,15 +9,16 @@
 #ifndef MENU_H_
 #define MENU_H_
 
+#define MENU_DEMO	0
+#define MENU_SOUND	1
 
-#define MENU_MAIN	0
-#define MENU_SUB	1
-#define MENU_DEMO	2
-#define MENU_TEST	3
+#define MENU_MAX	1
+#define MENU_MIN	2
 
-#define MENU_DEFAULT MENU_MAIN
+#define MENU_DEFAULT MENU_DEMO
 
 void menu_init(void);
+void menu_exec(uint8_t);
 void menu(void);
 
 

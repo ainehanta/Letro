@@ -5,6 +5,8 @@
  *      Author: makoto
  */
 
+//“Á‚É‚¢‚¶‚ç‚È‚¢‚Å‚­‚¾‚³‚¢
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -14,7 +16,6 @@
 #include "lcd.h"
 #include "led.h"
 #include "menu.h"
-#include "sound.h"
 #include "switch.h"
 #include "swreset.h"
 
@@ -32,8 +33,6 @@ int main(void)
 	menu_init();
 	sw_reset_init();
 	switch_init();
-	
-	sw_reset_enable();
 
 	while(1)
 	{
@@ -41,60 +40,48 @@ int main(void)
 	}
 }
 
-ISR(PCINT1_vect)
-{
-	_delay_ms(1);
-	sw_reset_menu();
-	sei();
-}
 
 /*
 
-if(switch_get(SWITCH_PIN0,SWITCH_P0_A))
+switch_get(SWITCH_CONT_P0,&switch_state_p0);
+if((switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0))
+{
+}
+else if((switch_state_p0.switch_b==1)&&(switch_state_p0.switch_prev_b==0))
 {
 }
 
-if(switch_get(SWITCH_PIN0,SWITCH_P0_B))
+if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0))
+{
+}
+else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0))
+{
+}
+else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0))
+{
+}
+else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0))
 {
 }
 
-if(switch_get(SWITCH_PIN0,SWITCH_P0_U))
+switch_get(SWITCH_CONT_P1,&switch_state_p1);
+if((switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0))
+{
+}
+else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0))
 {
 }
 
-if(switch_get(SWITCH_PIN0,SWITCH_P0_D))
+if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0))
 {
 }
-
-if(switch_get(SWITCH_PIN0,SWITCH_P0_L))
+else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0))
 {
 }
-
-if(switch_get(SWITCH_PIN0,SWITCH_P0_R))
+else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0))
 {
 }
-
-if(switch_get(SWITCH_PIN0,SWITCH_P1_A))
-{
-}
-
-if(switch_get(SWITCH_PIN0,SWITCH_P1_B))
-{
-}
-
-if(switch_get(SWITCH_PIN1,SWITCH_P1_D))
-{
-}
-
-if(switch_get(SWITCH_PIN1,SWITCH_P1_L))
-{
-}
-
-if(switch_get(SWITCH_PIN1,SWITCH_P1_R))
-{
-}
-
-if(switch_get(SWITCH_PIN1,SWITCH_P1_U))
+else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0))
 {
 }
 
