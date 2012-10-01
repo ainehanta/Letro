@@ -19,6 +19,7 @@ uint16_t led_fb01[LED_WIDTH*2];
 uint16_t anode_data;
 uint16_t kasode_data[2];
 uint8_t row_count;
+uint8_t color_flag = 0;
 
 void led_init(void)
 {
@@ -98,15 +99,26 @@ void led_draw_line(void)
 {
 	if(row_count>=16)
 	{
-		anode_data = 0b1000000000000000;
-		row_count = 0;
+		if(color_flag==0)
+		{
+			anode_data = 0b1000000000000000;
+			row_count = 0;
+			color_flag++;
+		}
+		else
+		{
+			anode_data = 0b1000000000000000;
+			row_count = 0;
+			color_flag--;
+		}
 	}
 
 	_mk_kasode_data(kasode_data,row_count);
 
-	_shift_data_out(kasode_data[1]);
-
-	_shift_data_out(kasode_data[0]);
+	if(color_flag==0)
+		_shift_data_out(kasode_data[1]);
+	else
+		_shift_data_out(kasode_data[0]);
 
 	_shift_data_out(anode_data);
 
@@ -122,7 +134,7 @@ void led_draw_full(void)
 	uint8_t i;
 
 	//フレームバッファの行数分ループ
-	for(i=0;i<LED_WIDTH;i++)
+	for(i=0;i<LED_WIDTH+LED_WIDTH;i++)
 	{
 		led_draw_line();
 	}

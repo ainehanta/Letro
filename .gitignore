@@ -1,0 +1,4 @@
+cpy_all_files.bat
+Debug/
+Release/
+*.cproj
