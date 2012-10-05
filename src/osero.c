@@ -52,9 +52,7 @@ void osero_main(void){
 			if(hantei != 0)
 				break;
 		}
-
 		iro = (put_kaisuu%2+1);	
-
 	}
 }
 
