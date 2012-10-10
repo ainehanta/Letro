@@ -32,12 +32,12 @@ void osero_main(void){
 	switch_state_clear(&switch_state_p1);
 
 	while(1){
-//		hyouji();
 		idou=0;
 		put_check=0;
 
 		read_button(&switch_state_p1);
-
+		sprintf(lcd_bf,"old_map = %d",old_map);
+		lcd_put_data(1,lcd_bf);
 		int hantei=0;
 		//自???????褐沚?
 		for (map_y = 0; map_y < MAP_SIZE ; map_y++) {
@@ -57,6 +57,7 @@ void osero_main(void){
 }
 
 //??
+//
 void map_idou(void){
 	switch(idou){
 		case 2: {	//??????
@@ -255,6 +256,7 @@ void map_idou(void){
 		case 99:{	put_kaisuu++;	}break;
 		default :{ }break;
 	}
+	lcd_put_data(1,"");
 }
 
 void read_button(switch_state *switch_state_p1){
