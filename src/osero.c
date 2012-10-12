@@ -36,22 +36,10 @@ void osero_main(void){
 		put_check=0;
 
 		read_button(&switch_state_p1);
-		sprintf(lcd_bf,"old_map = %d",old_map);
-		lcd_put_data(1,lcd_bf);
 		int hantei=0;
 		//自???????褐沚?
-		for (map_y = 0; map_y < MAP_SIZE ; map_y++) {
-			for (map_x = 0; map_x < MAP_SIZE ; map_x++) {
-				if (map[map_y][map_x]==3) {
-					map_idou();
-					hantei=1;
-				}
-				if(hantei != 0)
-					break;
-			}
-			if(hantei != 0)
-				break;
-		}
+		map_idou();
+
 		iro = (put_kaisuu%2+1);	
 	}
 }
@@ -67,10 +55,12 @@ void map_idou(void){
 								old_map=map[map_y+1][map_x];
 								map[map_y+1][map_x]=3;
 								led_plot(3,map_x,map_y+1);
+								map_y++;
 							}else{
 								old_map=map[0][map_x];
 								map[0][map_x]=3;
 								led_plot(3,map_x,0);
+								map_y = 0;
 							}
 						}break;
 		case 8:	{	//??????
@@ -80,10 +70,12 @@ void map_idou(void){
 								old_map=map[map_y-1][map_x];
 								map[map_y-1][map_x]=3;
 								led_plot(3,map_x,map_y-1);
+								map_y--;
 							}else{
 								old_map=map[MAP_SIZE-1][map_x];
 								map[MAP_SIZE-1][map_x]=3;
 								led_plot(3,map_x,MAP_SIZE-1);
+								map_y = MAP_SIZE-1; 
 							}
 						}break;
 		case 6: {	//右????
@@ -93,10 +85,12 @@ void map_idou(void){
 								old_map=map[map_y][map_x+1];
 								map[map_y][map_x+1]=3;
 								led_plot(3,map_x+1,map_y);
+								map_x++;
 							}else{
 								old_map=map[map_y-1][map_x];
 								map[map_y][0]=3;
 								led_plot(3,0,map_y);
+								map_x=0;
 							}
 						}break;
 		case 4:{	//??????
@@ -106,10 +100,12 @@ void map_idou(void){
 							 old_map=map[map_y][map_x-1];
 							 map[map_y][map_x-1]=3;
 							 led_plot(3,map_x-1,map_y);
+							 map_x--;
 						 }else{
 							 old_map=map[map_y][MAP_SIZE-1];
 							 map[map_y][MAP_SIZE-1]=3;
 							 led_plot(3,MAP_SIZE-1,map_y);
+							 map_x = MAP_SIZE-1;
 						 }
 					 }break;
 		case 5:{
@@ -256,7 +252,6 @@ void map_idou(void){
 		case 99:{	put_kaisuu++;	}break;
 		default :{ }break;
 	}
-	lcd_put_data(1,"");
 }
 
 void read_button(switch_state *switch_state_p1){
@@ -291,7 +286,8 @@ void read_button(switch_state *switch_state_p1){
 			chk = 1;
 		}
 		if(chk == 1){
-			lcd_put_data(0,"read_button_out ");
+			sprintf(lcd_bf,"old_map=%d        ",old_map);
+			lcd_put_data(0,lcd_bf);
 			break;
 		}
 	}
