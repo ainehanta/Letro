@@ -168,14 +168,12 @@ void led_plot(uint8_t color,uint8_t y,uint8_t x)
 		if(x<16&&y<16)
 		{
 			led_fb[x] |= (0b1000000000000000>>y);
-			led_fb[x+16] &= ~(0b1000000000000000>>y);
 		}
 	}
 	else if(color==LED_RED)
 	{
 		if(x<16&&y<16)
 		{
-			led_fb[x] &= ~(0b1000000000000000>>y);
 			led_fb[x+16] |= (0b1000000000000000>>y);
 		}
 	}
