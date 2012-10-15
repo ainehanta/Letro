@@ -45,12 +45,24 @@ void osero_main(void){
 	osero_init();
 
 	int hantei=0;
+	int blink_led=0;
 
 	while(1){
 		idou=0;
 		put_check=0;
 
 		led_draw_line();
+		_delay_us(1);
+		blink_led++;
+		
+		if(blink_led == 4000){
+			led_plot(LED_NONE,map_x,map_y);
+		}
+		if(blink_led == 5500){
+			led_plot(LED_YELLOW,map_x,map_y);
+			blink_led = 0;
+		}
+
 		switch_get(SWITCH_CONT_P1,&switch_state_p1);
 		if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0)){
 			osero_map_idou_up();
@@ -190,8 +202,7 @@ void osero_map_idou_put(void){
 	for (; map_yy < MAP_SIZE; map_yy++) {
 		if(map[map_yy+1][map_xx] == 0 || map[map_yy+1][map_xx] == iro || map_yy+2 > MAP_SIZE){
 			break;
-		}
-		if(map[map_yy+2][map_x] == iro){
+		}else if(map[map_yy+2][map_x] == iro){
 			for (; map_yyy < map_yy+2; map_yyy++){
 				map[map_yyy][map_x]=iro;
 				led_plot(LED_NONE,map_x,map_yyy);
@@ -206,8 +217,7 @@ void osero_map_idou_put(void){
 	for (; map_yy > 0 ; map_yy--) {
 		if(map[map_yy-1][map_xx] == 0 || map[map_yy-1][map_xx] == iro || map_yy-2 < 0){
 			break;
-		}
-		if(map[map_yy-2][map_x] == iro){
+		}else if(map[map_yy-2][map_x] == iro){
 			for (; map_yyy > map_yy-2; map_yyy--){
 				map[map_yyy][map_x]=iro;
 				led_plot(LED_NONE,map_x,map_yyy);
@@ -222,8 +232,7 @@ void osero_map_idou_put(void){
 	for (; map_xx < MAP_SIZE; map_xx++) {
 		if(map[map_yy][map_xx+1] == 0 || map[map_yy][map_xx+1] == iro || map_xx+2 > MAP_SIZE){
 			break;
-		}
-		if(map[map_y][map_xx+2] == iro){
+		}else	if(map[map_y][map_xx+2] == iro){
 			for (; map_xxx < map_xx+2; map_xxx++){
 				map[map_y][map_xxx]=iro;
 				led_plot(LED_NONE,map_xxx,map_y);
@@ -238,8 +247,7 @@ void osero_map_idou_put(void){
 	for (; map_xx > 0; map_xx--) {
 		if(map[map_yy][map_xx-1] == 0 || map[map_yy][map_xx-1] == iro || map_xx-2 < 0){
 			break;
-		}
-		if(map[map_y][map_xx-2] == iro){
+		}else if(map[map_y][map_xx-2] == iro){
 			for (; map_xxx > map_xx-2; map_xxx--){
 				map[map_y][map_xxx]=iro;
 				led_plot(LED_NONE,map_xxx,map_yyy);
@@ -255,8 +263,7 @@ void osero_map_idou_put(void){
 		if(map[map_yy+1][map_xx+1] == 0 || map[map_yy+1][map_xx+1] == iro ||
 				map_yy+2 > MAP_SIZE || map_xx+2 > MAP_SIZE){
 			break;
-		}
-		if(map[map_yy+2][map_xx+2] == iro){
+		}else if(map[map_yy+2][map_xx+2] == iro){
 			for (; map_xxx < map_xx+2 && map_yyy < map_yy+2; map_xxx++,map_yyy++){
 				map[map_yyy][map_xxx]=iro;
 				led_plot(LED_NONE,map_xxx,map_yyy);
@@ -272,8 +279,7 @@ void osero_map_idou_put(void){
 		if(map[map_yy-1][map_xx-1] == 0 || map[map_yy-1][map_xx-1] == iro ||
 				map_yy-2 < 0 || map_xx-2 < 0){
 			break;
-		}
-		if(map[map_yy-2][map_xx-2] == iro){
+		}else if(map[map_yy-2][map_xx-2] == iro){
 			for (; map_xxx > map_xx-2 && map_yyy > map_yy-2; map_xxx--,map_yyy--){
 				map[map_yyy][map_xxx]=iro;
 				led_plot(LED_NONE,map_xxx,map_yyy);
@@ -289,8 +295,7 @@ void osero_map_idou_put(void){
 		if(map[map_yy+1][map_xx-1] == 0 || map[map_yy+1][map_xx-1] == iro ||
 				map_yy+2 > MAP_SIZE || map_xx-2 < 0){
 			break;
-		}
-		if(map[map_yy+2][map_xx-2] == iro){
+		}else if(map[map_yy+2][map_xx-2] == iro){
 			for (; map_xxx > map_xx-2 && map_yyy < map_yy+2; map_xxx--,map_yyy++){
 				map[map_yyy][map_xxx]=iro;
 				led_plot(LED_NONE,map_xxx,map_yyy);
@@ -306,8 +311,7 @@ void osero_map_idou_put(void){
 		if(map[map_yy-1][map_xx+1] == 0 || map[map_yy-1][map_xx+1] == iro ||
 				map_yy-2 < 0 || map_xx+2 > MAP_SIZE){
 			break;
-		}
-		if(map[map_yy-2][map_xx+2] == iro){
+		}else if(map[map_yy-2][map_xx+2] == iro){
 			for (; map_xxx < map_xx+2 && map_yyy > map_yy-2; map_xxx++,map_yyy--){
 				map[map_yyy][map_xxx]=iro;
 				led_plot(LED_NONE,map_xxx,map_yyy);
@@ -320,12 +324,12 @@ void osero_map_idou_put(void){
 		//置いた回数
 		put_kaisuu++;
 		kaisuu++;
-		if (kaisuu%2) {
-			lcd_put_data(0,"Green turn      ");
-		}else{
+		if (put_kaisuu%2) {
 			lcd_put_data(0,"Red turn        ");
+		}else{
+			lcd_put_data(0,"Green turn      ");
 		}
-		
+	
 		map[map_y][map_x] = iro;
 		led_plot(LED_NONE,map_x,map_y);
 		led_plot(iro,map_x,map_y);
@@ -334,10 +338,17 @@ void osero_map_idou_put(void){
 		map[map_y][map_x] = 3;
 		led_plot(LED_NONE,map_x,map_y);
 		led_plot(iro,map_x,map_y);
+		
+		led_plot(LED_YELLOW,map_x,map_y);
 	}
 }
 
 //スキップイベントハンドラ
 void osero_map_idou_skip(void){
 	put_kaisuu++;
+	if (put_kaisuu%2) {
+		lcd_put_data(0,"Red turn        ");
+	}else{
+		lcd_put_data(0,"Green turn      ");
+	}
 }
