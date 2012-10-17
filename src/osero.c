@@ -51,7 +51,6 @@ void osero_main(void){
 		idou=0;
 		put_check=0;
 
-		led_draw_line();
 		_delay_us(1);
 		blink_led++;
 		
