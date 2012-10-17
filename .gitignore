@@ -1,5 +1,6 @@
 cpy_all_files.bat
 Debug/
 Release/
+bin/
 *.cproj
-/bin
+*.project
