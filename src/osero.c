@@ -18,6 +18,8 @@
 
 void osero_init(void){
 	
+	led_start();
+
 	lcd_put_data(0,"Green turn      ");
 		
 	map[8][8]=map[7][7]=LED_GREEN;
