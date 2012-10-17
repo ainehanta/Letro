@@ -33,6 +33,7 @@ extern uint8_t _exit_flag;
 
 void app_demo(void)
 {	
+	led_start();
 	lcd_put_data(0,"Running Demo... ");
 	lcd_put_data(1,"                ");
 	
@@ -135,8 +136,6 @@ void app_demo(void)
 		
 		led_plot(led_color_p0,prev_dot_p0[0],prev_dot_p0[1]);
 		led_plot(led_color_p1,prev_dot_p1[0],prev_dot_p1[1]);
-		
-		led_draw_line();
 		
 		_delay_us(100);
 	}

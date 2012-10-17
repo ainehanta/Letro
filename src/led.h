@@ -30,6 +30,8 @@
 #define LED_YELLOW			3
 
 void led_init(void);
+void led_start(void);
+void led_stop(void);
 void _shift_sck(void);
 void _shift_rck(void);
 void _shift_bit_out(uint8_t);
