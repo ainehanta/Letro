@@ -15,6 +15,7 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 
 #include "led.h"
 
@@ -24,6 +25,33 @@ uint16_t anode_data;
 uint16_t kasode_data[2];
 uint8_t row_count;
 uint8_t color_flag = 0;
+
+void led_start(void)
+{
+	cli();
+	OCR0A = 80;//カウントマックス値
+	TCCR0A = 0b00000010;
+	TCCR0B = 0b00000011;//下位3ビットで分周比を設定
+	TIMSK0 = 0b00000010;
+	sei();
+}
+
+void led_stop(void)
+{
+	cli();
+	TCCR0A = 0;
+	TIMSK0 = 0;
+	sei();
+}
+
+ISR(TIMER0_COMPA_vect)
+{
+	cli();
+	int sreg = SREG;
+	led_draw_line();
+	SREG = sreg;
+	sei();
+}
 
 void led_init(void)
 {
