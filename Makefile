@@ -1,7 +1,7 @@
 VPATH = ./src ./bin ./
 TARGET = Letro
 
-SRCS = app.c lcd.c led.c main.c menu.c sound.c switch.c swreset.c
+SRCS = app.c lcd.c led.c main.c menu.c sound.c switch.c swreset.c osero.c
 OBJS = $(SRCS:.c=.o)
 OBJS_PATH = $(SRCS:%.c=$(DEST_DIR)/%.o)
 DEST_DIR = ./bin
@@ -56,5 +56,6 @@ menu.c : menu.h
 sound.c : sound.h
 switch.c : switch.h
 swreset.c : swreset.h
+osero.c	:	osero.h
 
 .PHONY : clean clean_o

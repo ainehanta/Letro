@@ -9,9 +9,6 @@
 #ifndef APP_H_
 #define APP_H_
 
-#ifndef _BUILD_
-	#include <avr/iom1284p.h>
-#endif
 
 void app_demo(void);
 

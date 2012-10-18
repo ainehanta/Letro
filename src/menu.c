@@ -38,7 +38,7 @@ int8_t _mes_menu[17];
 extern uint8_t _exit_flag;
 
 const int8_t _mes_menu_select_top_0[] PROGMEM = "Letro: SelectApp";
-const int8_t _mes_menu_select_app_list_1[2][20] PROGMEM = {"01 : Demo       ","02 : Sound Test "};
+const int8_t _mes_menu_select_app_list_1[3][20] PROGMEM = {"01 : Demo       ","02 : Sound Test ","03 : Othero     "};
 
 void menu_init(void)
 {
@@ -52,6 +52,7 @@ void menu_exec(uint8_t mode)
 	{
 		case MENU_DEMO  : app_demo();  break;
 		case MENU_SOUND : app_sound(); break;
+		case MENU_OTHERO: app_osero(); break;
 	}
 }
 
@@ -99,6 +100,12 @@ void menu(void)
 			}
 			else if(menu_mode==MENU_SOUND)
 			{
+				menu_mode=MENU_OTHERO;
+				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
+				lcd_put_data(1,_mes_menu);
+			}
+			else if(menu_mode==MENU_OTHERO)
+			{
 				menu_mode=MENU_DEMO;
 				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
 				lcd_put_data(1,_mes_menu);
@@ -114,6 +121,11 @@ void menu(void)
 			}
 			else if(menu_mode==MENU_SOUND)
 			{
+				menu_mode=MENU_DEMO;
+				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
+				lcd_put_data(1,_mes_menu);
+			}
+			else if(menu_mode==MENU_OTHERO){
 				menu_mode=MENU_DEMO;
 				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
 				lcd_put_data(1,_mes_menu);
@@ -145,6 +157,11 @@ void menu(void)
 			}
 			else if(menu_mode==MENU_SOUND)
 			{
+				menu_mode=MENU_OTHERO;
+				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
+				lcd_put_data(1,_mes_menu);
+			}
+			else if(menu_mode==MENU_OTHERO){
 				menu_mode=MENU_DEMO;
 				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
 				lcd_put_data(1,_mes_menu);
@@ -159,6 +176,12 @@ void menu(void)
 				lcd_put_data(1,_mes_menu);
 			}
 			else if(menu_mode==MENU_SOUND)
+			{
+				menu_mode=MENU_OTHERO;
+				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
+				lcd_put_data(1,_mes_menu);
+			}
+			else if(menu_mode==MENU_OTHERO)
 			{
 				menu_mode=MENU_DEMO;
 				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);

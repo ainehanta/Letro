@@ -7,8 +7,8 @@
 
 /*
 
-	このファイルとヘッダに組み込むアプリケーションを
-	「app_"アプリケーション名"」の形で記述していってください。
+	????�t�@�C��??�w�b�_??�g??��??�A�v���P�[�V����??
+	�uapp_"�A�v���P�[�V����??"�v??�`??�L?q??????????????????�B
 
 */
 
@@ -16,13 +16,11 @@
 	#define F_CPU 16000000UL
 #endif
 
-#ifndef _BUILD_
-	#include <avr/iom1284p.h>
-#endif
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+
+#include <stdio.h>
 
 #include "app.h"
 #include "lcd.h"
@@ -33,7 +31,6 @@ extern uint8_t _exit_flag;
 
 void app_demo(void)
 {	
-	led_start();
 	lcd_put_data(0,"Running Demo... ");
 	lcd_put_data(1,"                ");
 	
@@ -141,10 +138,14 @@ void app_demo(void)
 	}
 }
 
+void app_osero(void){
+	osero_main();
+}
+
 void app_sound(void)
 {
-	//飽きた…
-	
+	//�O????�c
+
 	//switch_state switch_state_p0;
 	//switch_state_clear(&switch_state_p0);
 	//switch_state switch_state_p1;
@@ -155,47 +156,47 @@ void app_sound(void)
 	//
 	//for(;;)
 	//{
-		//switch_get(SWITCH_CONT_P0,&switch_state_p0);
-		//if((switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0))
-		//{
-			//sound_set(SOUND_A,1);
-		//}
-		//else if((switch_state_p0.switch_b==1)&&(switch_state_p0.switch_prev_b==0))
-		//{
-		//}
-//
-		//if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0))
-		//{
-		//}
-		//else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0))
-		//{
-		//}
-		//else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0))
-		//{
-		//}
-		//else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0))
-		//{
-		//}
-//
-		//switch_get(SWITCH_CONT_P1,&switch_state_p1);
-		//if((switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0))
-		//{
-		//}
-		//else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0))
-		//{
-		//}
-//
-		//if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0))
-		//{
-		//}
-		//else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0))
-		//{
-		//}
-		//else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0))
-		//{
-		//}
-		//else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0))
-		//{
-		//}
+	//switch_get(SWITCH_CONT_P0,&switch_state_p0);
+	//if((switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0))
+	//{
+	//sound_set(SOUND_A,1);
+	//}
+	//else if((switch_state_p0.switch_b==1)&&(switch_state_p0.switch_prev_b==0))
+	//{
+	//}
+	//
+	//if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0))
+	//{
+	//}
+	//else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0))
+	//{
+	//}
+	//else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0))
+	//{
+	//}
+	//else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0))
+	//{
+	//}
+	//
+	//switch_get(SWITCH_CONT_P1,&switch_state_p1);
+	//if((switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0))
+	//{
+	//}
+	//else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0))
+	//{
+	//}
+	//
+	//if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0))
+	//{
+	//}
+	//else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0))
+	//{
+	//}
+	//else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0))
+	//{
+	//}
+	//else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0))
+	//{
+	//}
 	//}
 }
