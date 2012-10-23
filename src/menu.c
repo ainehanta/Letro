@@ -52,7 +52,7 @@ void menu_exec(uint8_t mode)
 	{
 		case MENU_DEMO  : app_demo();  break;
 		case MENU_SOUND : app_sound(); break;
-		case MENU_OTHERO: app_osero(); break;
+		case MENU_OTHERO: app_gomoku(); break;
 	}
 }
 

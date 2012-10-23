@@ -138,8 +138,8 @@ void app_demo(void)
 	}
 }
 
-void app_osero(void){
-	osero_main();
+void app_gomoku(void){
+	gomoku_main();
 }
 
 void app_sound(void)
