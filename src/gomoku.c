@@ -19,7 +19,14 @@
 void gomoku_init(void){
 
 	lcd_put_data(0,"Green turn      ");
+	led_start();
 
+	gomoku_map_clear();
+	
+	win=0;
+
+	iro=1;
+	check=0;
 	old_map = LED_NONE;
 
 }
@@ -38,65 +45,70 @@ void gomoku_main(void){
 	int blink_led=0;
 
 	while(1){
-		idou=0;
-		put_check=0;
-
-		led_draw_line();
-		_delay_us(1);
-		blink_led++;
-
-		if(blink_led == 4000){
-			led_plot(LED_NONE,map_x,map_y);
-		}
-		if(blink_led == 5500){
-			led_plot(LED_YELLOW,map_x,map_y);
-			blink_led = 0;
-		}
-
-		switch_get(SWITCH_CONT_P1,&switch_state_p1);
-		if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0)){
-			gomoku_map_idou_up();
-			lcd_put_data(1,"ue              ");
-		}else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0)){
-			gomoku_map_idou_down();
-			lcd_put_data(1,"sita            ");
-		}else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0)){
-			gomoku_map_idou_left();
-			lcd_put_data(1,"hidari          ");
-		}else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0)){
-			gomoku_map_idou_right();
-			lcd_put_data(1,"migi            ");
-		}else if((switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0)){
-			gomoku_map_idou_put();
-			lcd_put_data(1,"put             ");
-		}else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0)){
-			gomoku_map_idou_skip();
-			lcd_put_data(1,"skip            ");
-		}
-
-		switch_get(SWITCH_CONT_P0,&switch_state_p0);
-		if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0)){
-			gomoku_map_idou_up();
-			lcd_put_data(1,"ue              ");
-		}else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0)){
-			gomoku_map_idou_down();
-			lcd_put_data(1,"sita            ");
-		}else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0)){
-			gomoku_map_idou_left();
-			lcd_put_data(1,"hidari          ");
-		}else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0)){
-			gomoku_map_idou_right();
-			lcd_put_data(1,"migi            ");
-		}else if((switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0)){
-			gomoku_map_idou_put();
-			lcd_put_data(1,"put             ");
-		}else if((switch_state_p0.switch_b==1)&&(switch_state_p0.switch_prev_b==0)){
-			gomoku_map_idou_skip();
-			lcd_put_data(1,"skip            ");
-		}
-
-		iro = (put_kaisuu%2+1);	
+	  if(iro==1&&win==0){
+	    lcd_put_data(0,"Green turn      ");
+	  }else if(win==0){
+	    lcd_put_data(0,"Red   turn      ");
+	  }
+	  idou=0;
+	  put_check=0;
+	  
+	  //led_draw_line();
+	  _delay_us(1);
+	  blink_led++;
+	  
+	  if(blink_led == 4000){
+	    led_plot(LED_NONE,map_x,map_y);
+	  }
+	  if(blink_led == 5500){
+	    led_plot(LED_YELLOW,map_x,map_y);
+	    blink_led = 0;
+	  }
+	  switch_get(SWITCH_CONT_P1,&switch_state_p1);
+	  if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0)){
+	    gomoku_map_idou_up();
+	    lcd_put_data(1,"ue              ");
+	  }else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0)){
+	    gomoku_map_idou_down();
+	    lcd_put_data(1,"sita            ");
+	  }else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0)){
+	    gomoku_map_idou_left();
+	    lcd_put_data(1,"hidari          ");
+	  }else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0)){
+	    gomoku_map_idou_right();
+	    lcd_put_data(1,"migi            ");
+	  }else if((win==0&&switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0)){
+	    gomoku_map_idou_put();
+	    lcd_put_data(1,"put             ");
+	  }else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0)){
+	    //gomoku_map_idou_skip();
+	    //lcd_put_data(1,"skip            ");
+	  }
+	  
+	  switch_get(SWITCH_CONT_P0,&switch_state_p0);
+	  if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0)){
+	    gomoku_map_idou_up();
+	    lcd_put_data(1,"ue              ");
+	  }else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0)){
+	    gomoku_map_idou_down();
+	    lcd_put_data(1,"sita            ");
+	  }else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0)){
+	    gomoku_map_idou_left();
+	    lcd_put_data(1,"hidari          ");
+	  }else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0)){
+	    gomoku_map_idou_right();
+	    lcd_put_data(1,"migi            ");
+	  }else if((win==0&&switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0)){
+	    gomoku_map_idou_put();
+	    lcd_put_data(1,"put             ");
+	  }else if((switch_state_p0.switch_b==1)&&(switch_state_p0.switch_prev_b==0)){
+	    //gomoku_map_idou_skip();
+	    //	lcd_put_data(1,"skip            ");
+	  }
+	  iro = (put_kaisuu%2+1);
+	    map_check();
 	}
+
 }
 
 //マップをクリアー
@@ -104,7 +116,7 @@ void gomoku_map_clear(void){
 	int x,y;
 	for(y=0;y<MAP_SIZE;y++){
 		for(x=0;x<MAP_SIZE;x++){
-			map[y][x] = LED_NONE;
+			map[y][x] = 0;
 		}
 	}
 }
@@ -183,82 +195,21 @@ void gomoku_map_idou_down(void){
 
 //プットイベントハンドラ
 void gomoku_map_idou_put(void){
-  
-  roop=0;					//x軸についての評価
-  while(roop<=4){
-    xhyouka=1;	
-    xi=0;
-    xx = map_x-roop;
-    while(xi<=4){				//5個のかたまり	
-      //printf("masu[%3d][%3d]=%d ",xx+xi,ya,masu[xx+xi][ya]);
-      xhyouka *= map[map_y][map_x+xi];
-      xi++;
+  if(check!=0){
+    if(map[map_x][map_y]!=1 && map[map_x][map_y]!=2){
+      map[map_x][map_y]=iro;
+      old_map=iro;
+      
+      if(iro==2){
+	led_plot(LED_RED,map_x,map_y);
+      }else{
+	led_plot(LED_GREEN,map_x,map_y);
+      }
+      put_kaisuu++;
     }
-    //printf("xhyouka=%d",xhyouka);
-    if (xhyouka==1)
-      //printf("白の勝ち");
-    if (xhyouka==32)
-      //printf("黒の勝ち");
-      //puts("");
-    roop++;
+  }else{
+    check=1;
   }
-  roop=0;						//y軸についての評価
-  while(roop<=4){
-    yhyouka=1;
-    yi=0;
-    yy = map_y-roop;
-    while(yi<=4){
-      //printf("masu[%3d][%3d]=%d ",xa,yy+yi,masu[xa][yy+yi]);
-      yhyouka *= map[map_y+yi][map_x];
-      yi++;
-    }
-    //printf("yhyouka=%d",yhyouka);
-    if (yhyouka==1)
-      //printf("白の勝ち");
-    if (yhyouka==32)
-      //printf("黒の勝ち");
-      //puts("");
-    roop++;
-  }
-  roop=0;						//斜めの評価
-  while(roop<=4){
-    naname=1;
-    na=0;
-    xna = map_x-roop;
-    yna = map_y-roop;
-    while(na<=4){
-      //printf("masu[%3d][%3d]=%d ",xna+na,yna+na,masu[xna+na][yna+na]);
-      naname *= map[yna+na][xna+na];
-      na++;
-    }
-    //printf("naname=%d",naname);
-    if (naname==1)
-      //printf("白の勝ち");
-    if (naname==32)
-      //printf("黒の勝ち");
-      //puts("");
-    roop++;
-  }
-  roop=0;
-  while(roop<=4){
-    naname2=1;
-    na2=0;
-    xna2 = map_x-roop;
-    yna2 = map_y+roop;
-    while(na2<=4){
-      //printf("masu[%3d][%3d]=%d ",xna2-na2,yna2-na2,masu[xna2+na2][yna2-na2]);
-      naname2 *= map[yna2+na2][xna2-na2];
-      na2++;
-    }
-    //printf("naname2=%d",naname2);
-    if (naname2==1)
-      //printf("白の勝ち");
-    if (naname2==32)
-      //printf("黒の勝ち");
-      //puts("");
-    roop++;
-  }
-  
 }
 
 //スキップイベントハンドラ
@@ -269,4 +220,76 @@ void gomoku_map_idou_skip(void){
 	}else{
 		lcd_put_data(0,"Green turn      ");
 	}
+}
+
+void map_check(void){
+  //MAP_SIZE
+
+  //縦
+  for(check_k=1;check_k<3;check_k++){
+    for(check_j=0;check_j<MAP_SIZE;check_j++){
+      for(check_i=0;check_i<MAP_SIZE-5;check_i++){
+	if(map[check_j][check_i]==map[check_j][check_i+1] && map[check_j][check_i+1]==map[check_j][check_i+2] && map[check_j][check_i+2]==map[check_j][check_i+3] && map[check_j][check_i+3]==map[check_j][check_i+4]){
+	  if(map[check_j][check_i]==1){
+	    win=1;
+	    lcd_put_data(0,"Green win       ");
+	  }else if(map[check_j][check_i]==2){
+	    win=1;
+	    lcd_put_data(0,"Red   win       ");
+	  }
+	}
+      }
+    }
+  }
+  
+  //横
+  for(check_k=1;check_k<3;check_k++){
+    for(check_j=0;check_j<MAP_SIZE;check_j++){
+      for(check_i=0;check_i<MAP_SIZE-5;check_i++){
+	if(map[check_i][check_j]==map[check_i+1][check_j] && map[check_i+1][check_j]==map[check_i+2][check_j] && map[check_i+2][check_j]==map[check_i+3][check_j] && map[check_i+3][check_j]==map[check_i+4][check_j]){
+	  if(map[check_j][check_i]==1){
+	    win=1;
+	    lcd_put_data(0,"Green win       ");
+	  }else if(map[check_j][check_i]==2){
+	    win=1;
+	    lcd_put_data(0,"Red   win       ");
+	  }
+	}
+      }
+    }
+  }
+
+  //斜め 右下がり
+  for(check_k=1;check_k<3;check_k++){
+    for(check_j=0;check_j<MAP_SIZE-5;check_j++){
+      for(check_i=0;check_i<MAP_SIZE-5;check_i++){
+	if(map[check_i][check_j]==map[check_i+1][check_j+1] && map[check_i+1][check_j+1]==map[check_i+2][check_j+2] && map[check_i+2][check_j+2]==map[check_i+3][check_j+3]  && map[check_i+3][check_j+3]==map[check_i+4][check_j+4]){
+	  if(map[check_j][check_i]==1){
+	    win=1;
+	    lcd_put_data(0,"Green win       ");
+	  }else if(map[check_j][check_i]==2){
+	    win=1;
+	    lcd_put_data(0,"Red   win       ");
+	  }
+	}
+      }
+    }
+  }
+
+  //斜め 左下がり
+  for(check_k=1;check_k<3;check_k++){
+    for(check_j=MAP_SIZE;check_j>5;check_j--){
+      for(check_i=MAP_SIZE;check_i>5;check_i--){
+	if(map[check_i][check_j]==map[check_i-1][check_j-1] && map[check_i-1][check_j-1]==map[check_i-2][check_j-2] && map[check_i-2][check_j-2]==map[check_i-3][check_j-3]  && map[check_i-3][check_j-3]==map[check_i-4][check_j-4]){
+	  if(map[check_j][check_i]==1){
+	    win=1;
+	    lcd_put_data(0,"Green win       ");
+	  }else if(map[check_j][check_i]==2){
+	    win=1;
+	    lcd_put_data(0,"Red   win       ");
+	  }
+	}
+      }
+    }
+  }
 }

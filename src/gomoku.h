@@ -12,23 +12,18 @@ int put_check;
 int old_map=0;
 int kaisuu=1;
 
-int roop;
-int xhyouka;	
-int xi;
-int xx;
-int yhyouka;
-int yi;
-int yy;
-int naname;
-int na;
-int xna,yna;
-int naname2;
-int na2;
-int xna2,yna2;
+int check;
+
+int win;
+int check_i;
+int check_j;
+int check_k;
 
 int result;
 
 char lcd_bf[17];
+
+void map_check(void);
 
 void map_idou(void);
 void read_button(switch_state*);
