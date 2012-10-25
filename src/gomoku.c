@@ -85,9 +85,19 @@ void gomoku_main(void){
 	  }else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0)){
 	    gomoku_map_idou_right();
 	    lcd_put_data(1,"migi            ");
-	  }else if((win==0&&switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0)){
-	    gomoku_map_idou_put();
-	    lcd_put_data(1,"put             ");
+	  }else if((switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0)){
+	    if(win==0){
+	      gomoku_map_idou_put();
+	      lcd_put_data(1,"put             ");
+	    }else{
+	      /*
+	      lcd_put_data(0,"Thank you for   ");
+	      lcd_put_data(1,"      Playing!! ");
+	      _delay_us(1000);
+	      lcd_put_data(0,"Letro: SelectApp");
+	      return 
+	      */;
+	    }
 	  }else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0)){
 	    //gomoku_map_idou_skip();
 	    //lcd_put_data(1,"skip            ");
@@ -107,8 +117,18 @@ void gomoku_main(void){
 	    gomoku_map_idou_right();
 	    lcd_put_data(1,"migi            ");
 	  }else if((win==0&&switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0)){
-	    gomoku_map_idou_put();
-	    lcd_put_data(1,"put             ");
+	    if(win==0){
+	      gomoku_map_idou_put();
+	      lcd_put_data(1,"put             ");
+	    }else{
+	      /*
+	      lcd_put_data(0,"Thank you for   ");
+	      lcd_put_data(1,"      Playing!! ");
+	      _delay_us(1000);
+	      lcd_put_data(0,"Letro: SelectApp");
+	      return ;
+	      */
+	    }
 	  }else if((switch_state_p0.switch_b==1)&&(switch_state_p0.switch_prev_b==0)){
 	    //gomoku_map_idou_skip();
 	    //	lcd_put_data(1,"skip            ");
@@ -248,10 +268,12 @@ void map_check(void){
       if(map[check_j][check_i] == 1 && map[check_j][check_i+1] == 1 && map[check_j][check_i+2] == 1 && map[check_j][check_i+3] == 1 && map[check_j][check_i+4] == 1){
 	win=1;
 	lcd_put_data(0,"Green win       ");
+	lcd_put_data(1,"thx 4 playing :)");
       }
       if(map[check_j][check_i] == 2 && map[check_j][check_i+1] == 2 && map[check_j][check_i+2] == 2 && map[check_j][check_i+3] == 2 && map[check_j][check_i+4] == 2){
 	win=1;
 	lcd_put_data(0,"Red   win       ");
+	lcd_put_data(1,"thx 4 playing :)");
       }
     }
   }
@@ -265,10 +287,12 @@ void map_check(void){
       if(map[check_i][check_j] == 1 && map[check_i+1][check_j] == 1 && map[check_i+2][check_j] == 1 && map[check_i+3][check_j] == 1 && map[check_i+4][check_j] == 1){
 	  win=1;
 	  lcd_put_data(0,"Green win       ");
+	  lcd_put_data(1,"thx 4 playing :)");
 	}
       if(map[check_i][check_j] == 2 && map[check_i+1][check_j] == 2 && map[check_i+2][check_j] == 2 && map[check_i+3][check_j] == 2 && map[check_i+4][check_j] == 2){
 	 win=1;
 	 lcd_put_data(0,"Red   win       ");
+	 lcd_put_data(1,"thx 4 playing :)");
       }
     }
   }
@@ -282,11 +306,12 @@ void map_check(void){
       if(map[check_j][check_i] == 1 && map[check_j+1][check_i+1] == 1 && map[check_j+2][check_i+2] == 1 && map[check_j+3][check_i+3] == 1 && map[check_j+4][check_i+4] == 1){
 	win=1;
 	lcd_put_data(0,"Green win       ");
+	lcd_put_data(1,"thx 4 playing :)");
       }
       if(map[check_j][check_i] == 2 && map[check_j+1][check_i+1] == 2 && map[check_j+2][check_i+2] == 2 && map[check_j+3][check_i+3] == 2 && map[check_j+4][check_i+4] == 2){
 	win=1;
 	lcd_put_data(0,"Red   win       ");
-	
+	lcd_put_data(1,"thx 4 playing :)");
       }
     }
   }
@@ -299,11 +324,12 @@ void map_check(void){
       if(map[check_j][check_i] == 1 && map[check_j-1][check_i+1] == 1 && map[check_j-2][check_i+2] == 1 && map[check_j-3][check_i+3] == 1 && map[check_j-4][check_i+4] == 1){
 	win=1;
 	lcd_put_data(0,"Green win       ");
+	lcd_put_data(1,"thx 4 playing:) ");
       }
       if(map[check_j][check_i] == 2 && map[check_j-1][check_i+1] == 2 && map[check_j-2][check_i+2] == 2 && map[check_j-3][check_i+3] == 2 && map[check_j-4][check_i+4] == 2){
 	win=1;
 	lcd_put_data(0,"Red   win       ");
-	
+	lcd_put_data(1,"thx 4 playing :)");
       }
     }
   }
