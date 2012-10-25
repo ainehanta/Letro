@@ -24,6 +24,7 @@ int result;
 char lcd_bf[17];
 
 void map_check(void);
+void map_draw(void);
 
 void map_idou(void);
 void read_button(switch_state*);
