@@ -30,11 +30,11 @@ void gomoku_init(void){
 
 	map_x=0;
 	map_y=0;
-
+	
 	iro=1;
 	check=0;
 	old_map = LED_NONE;
-
+	
 }
 
 void gomoku_main(void){
@@ -79,67 +79,15 @@ void gomoku_main(void){
 	  switch_get(SWITCH_CONT_P1,&switch_state_p1);
 	  if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0)){
 	    gomoku_map_idou_up();
-	    if(win==0){
-	      lcd_put_data(1,"ue              ");
-	    }
 	  }else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0)){
 	    gomoku_map_idou_down();
-	    if(win==0){
-	      lcd_put_data(1,"sita            ");
-	    }
 	  }else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0)){
 	    gomoku_map_idou_left();
-	    if(win==0){
-	      lcd_put_data(1,"hidari          ");
-	    }
 	  }else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0)){
 	    gomoku_map_idou_right();
-	    if(win==0){
-	      lcd_put_data(1,"migi            ");
-	    }
 	  }else if((switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0)){
 	    if(win==0){
 	      gomoku_map_idou_put();
-	      lcd_put_data(1,"put             ");
-	    }else{
-	      /*
-	      lcd_put_data(0,"Thank you for   ");
-	      lcd_put_data(1,"      Playing!! ");
-	      _delay_us(1000);
-	      lcd_put_data(0,"Letro: SelectApp");
-	      return 
-	      */;
-	    }
-	  }else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0)){
-	    //gomoku_map_idou_skip();
-	    //lcd_put_data(1,"skip            ");
-	  }
-	  map_check();
-	  switch_get(SWITCH_CONT_P0,&switch_state_p0);
-	  if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0)){
-	    gomoku_map_idou_up();
-	    if(win==0){
-	      lcd_put_data(1,"ue              ");
-	    }
-	  }else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0)){
-	    gomoku_map_idou_down();
-	    if(win==0){
-	      lcd_put_data(1,"sita            ");
-	    }
-	  }else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0)){
-	    gomoku_map_idou_left();
-	    if(win==0){
-	      lcd_put_data(1,"hidari          ");
-	    }
-	  }else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0)){
-	    gomoku_map_idou_right();
-	    if(win==0){
-	      lcd_put_data(1,"migi            ");
-	    }
-	  }else if((win==0&&switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0)){
-	    if(win==0){
-	      gomoku_map_idou_put();
-	      lcd_put_data(1,"put             ");
 	    }else{
 	      /*
 	      lcd_put_data(0,"Thank you for   ");
@@ -147,7 +95,33 @@ void gomoku_main(void){
 	      _delay_us(1000);
 	      lcd_put_data(0,"Letro: SelectApp");
 	      return ;
-	      */
+	    */
+	    }
+	  }else if((switch_state_p1.switch_b==1)&&(switch_state_p1.switch_prev_b==0)){
+	    //gomoku_map_idou_skip();
+	    //lcd_put_data(1,"skip            ");
+	  }
+	    map_check();
+	  switch_get(SWITCH_CONT_P0,&switch_state_p0);
+	  if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0)){
+	    gomoku_map_idou_up();
+	    if(win==0){
+	    }
+	  }else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0)){
+	    gomoku_map_idou_down();
+	    if(win==0){
+	    }
+	  }else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0)){
+	    gomoku_map_idou_left();
+	    if(win==0){
+	    }
+	  }else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0)){
+	    gomoku_map_idou_right();
+	    if(win==0){
+	    }
+	  }else if((win==0&&switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0)){
+	    if(win==0){
+	      gomoku_map_idou_put();
 	    }
 	  }else if((switch_state_p0.switch_b==1)&&(switch_state_p0.switch_prev_b==0)){
 	    //gomoku_map_idou_skip();
@@ -155,10 +129,8 @@ void gomoku_main(void){
 	  }
 	  iro = (put_kaisuu%2+1);
 	}
-	
 }
-
-//マップをクリアー
+	//マップをクリアー
 void gomoku_map_clear(void){
   int x,y;
   for(y=0;y<MAP_SIZE;y++){
