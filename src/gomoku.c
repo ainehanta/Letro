@@ -26,6 +26,7 @@ void gomoku_init(void){
 	win=0;
 
 	led_plot(LED_YELLOW,0,0);
+	map[0][0]=LED_YELLOW;
 
 	map_x=0;
 	map_y=0;
@@ -50,6 +51,8 @@ void gomoku_main(void){
 	int blink_led=0;
 
 	while(1){
+	  map_check();
+	  map_draw();
 	  if(iro==1&&win==0){
 	    lcd_put_data(0,"Green turn      ");
 	  }else if(win==0){
@@ -89,7 +92,7 @@ void gomoku_main(void){
 	    //gomoku_map_idou_skip();
 	    //lcd_put_data(1,"skip            ");
 	  }
-	  
+	  map_check();
 	  switch_get(SWITCH_CONT_P0,&switch_state_p0);
 	  if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0)){
 	    gomoku_map_idou_up();
@@ -111,10 +114,8 @@ void gomoku_main(void){
 	    //	lcd_put_data(1,"skip            ");
 	  }
 	  iro = (put_kaisuu%2+1);
-	  map_draw();
-	  map_check();
 	}
-
+	
 }
 
 //マップをクリアー
@@ -212,6 +213,7 @@ void gomoku_map_idou_put(void){
   if(check!=0){
     if(old_map==0){
       map[map_x][map_y]=iro;
+      map_check();
       old_map=iro;
       map[map_x][map_y]=3;
       if(iro==2){
@@ -242,8 +244,8 @@ void map_check(void){
   
   //縦
   for(check_j=0;check_j<MAP_SIZE;check_j++){
-    for(check_i=0;check_i<MAP_SIZE-5;check_i++){
-      if(map[check_j][check_i] == 1 && map[check_j][check_i+1] == 1 && map[check_j][check_i+2] == 1 && map[check_j][check_i+3] == 1 && map[check_j][check_i+4] == 2){
+    for(check_i=0;check_i<MAP_SIZE-4;check_i++){
+      if(map[check_j][check_i] == 1 && map[check_j][check_i+1] == 1 && map[check_j][check_i+2] == 1 && map[check_j][check_i+3] == 1 && map[check_j][check_i+4] == 1){
 	win=1;
 	lcd_put_data(0,"Green win       ");
       }
@@ -259,7 +261,7 @@ void map_check(void){
   //横
 
   for(check_j=0;check_j<MAP_SIZE;check_j++){
-    for(check_i=0;check_i<MAP_SIZE-5;check_i++){
+    for(check_i=0;check_i<MAP_SIZE-4;check_i++){
       if(map[check_i][check_j] == 1 && map[check_i+1][check_j] == 1 && map[check_i+2][check_j] == 1 && map[check_i+3][check_j] == 1 && map[check_i+4][check_j] == 1){
 	  win=1;
 	  lcd_put_data(0,"Green win       ");
@@ -275,8 +277,8 @@ void map_check(void){
   
   //斜め 右下がり
   
-  for(check_j=0;check_j<MAP_SIZE-5;check_j++){
-    for(check_i=0;check_i<MAP_SIZE-5;check_i++){
+  for(check_j=0;check_j<MAP_SIZE-4;check_j++){
+    for(check_i=0;check_i<MAP_SIZE-4;check_i++){
       if(map[check_j][check_i] == 1 && map[check_j+1][check_i+1] == 1 && map[check_j+2][check_i+2] == 1 && map[check_j+3][check_i+3] == 1 && map[check_j+4][check_i+4] == 1){
 	win=1;
 	lcd_put_data(0,"Green win       ");
@@ -292,13 +294,13 @@ void map_check(void){
 
   //斜め 左下がり
   
-  for(check_j=MAP_SIZE;check_j>5;check_j--){
-    for(check_i=MAP_SIZE;check_i>5;check_i--){
-      if(map[check_j][check_i] == 1 && map[check_j-1][check_i-1] == 1 && map[check_j-2][check_i-2] == 1 && map[check_j-3][check_i-3] == 1 && map[check_j-4][check_i-4] == 2){
+  for(check_j=MAP_SIZE-1;check_j>4;check_j--){
+    for(check_i=0;check_i<MAP_SIZE-4;check_i++){
+      if(map[check_j][check_i] == 1 && map[check_j-1][check_i+1] == 1 && map[check_j-2][check_i+2] == 1 && map[check_j-3][check_i+3] == 1 && map[check_j-4][check_i+4] == 1){
 	win=1;
 	lcd_put_data(0,"Green win       ");
       }
-      if(map[check_j][check_i] == 2 && map[check_j-1][check_i-1] == 2 && map[check_j-2][check_i-2] == 2 && map[check_j-3][check_i-3] == 2 &&map[check_j-4][check_i-4] == 2){
+      if(map[check_j][check_i] == 2 && map[check_j-1][check_i+1] == 2 && map[check_j-2][check_i+2] == 2 && map[check_j-3][check_i+3] == 2 && map[check_j-4][check_i+4] == 2){
 	win=1;
 	lcd_put_data(0,"Red   win       ");
 	
