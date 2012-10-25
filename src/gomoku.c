@@ -65,6 +65,10 @@ void gomoku_main(void){
 	  _delay_us(1);
 	  blink_led++;
 	  
+	  if(win==1){
+	    lcd_put_data(1,"thx 4 playing :)");
+	  }
+
 	  if(blink_led == 4000){
 	    led_plot(LED_NONE,map_x,map_y);
 	  }
@@ -75,16 +79,24 @@ void gomoku_main(void){
 	  switch_get(SWITCH_CONT_P1,&switch_state_p1);
 	  if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0)){
 	    gomoku_map_idou_up();
-	    lcd_put_data(1,"ue              ");
+	    if(win==0){
+	      lcd_put_data(1,"ue              ");
+	    }
 	  }else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0)){
 	    gomoku_map_idou_down();
-	    lcd_put_data(1,"sita            ");
+	    if(win==0){
+	      lcd_put_data(1,"sita            ");
+	    }
 	  }else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0)){
 	    gomoku_map_idou_left();
-	    lcd_put_data(1,"hidari          ");
+	    if(win==0){
+	      lcd_put_data(1,"hidari          ");
+	    }
 	  }else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0)){
 	    gomoku_map_idou_right();
-	    lcd_put_data(1,"migi            ");
+	    if(win==0){
+	      lcd_put_data(1,"migi            ");
+	    }
 	  }else if((switch_state_p1.switch_a==1)&&(switch_state_p1.switch_prev_a==0)){
 	    if(win==0){
 	      gomoku_map_idou_put();
@@ -106,16 +118,24 @@ void gomoku_main(void){
 	  switch_get(SWITCH_CONT_P0,&switch_state_p0);
 	  if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0)){
 	    gomoku_map_idou_up();
-	    lcd_put_data(1,"ue              ");
+	    if(win==0){
+	      lcd_put_data(1,"ue              ");
+	    }
 	  }else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0)){
 	    gomoku_map_idou_down();
-	    lcd_put_data(1,"sita            ");
+	    if(win==0){
+	      lcd_put_data(1,"sita            ");
+	    }
 	  }else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0)){
 	    gomoku_map_idou_left();
-	    lcd_put_data(1,"hidari          ");
+	    if(win==0){
+	      lcd_put_data(1,"hidari          ");
+	    }
 	  }else if((switch_state_p0.switch_r==1)&&(switch_state_p0.switch_prev_r==0)){
 	    gomoku_map_idou_right();
-	    lcd_put_data(1,"migi            ");
+	    if(win==0){
+	      lcd_put_data(1,"migi            ");
+	    }
 	  }else if((win==0&&switch_state_p0.switch_a==1)&&(switch_state_p0.switch_prev_a==0)){
 	    if(win==0){
 	      gomoku_map_idou_put();
