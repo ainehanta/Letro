@@ -38,7 +38,7 @@ int8_t _mes_menu[17];
 extern uint8_t _exit_flag;
 
 const int8_t _mes_menu_select_top_0[] PROGMEM = "Letro: SelectApp";
-const int8_t _mes_menu_select_app_list_1[3][20] PROGMEM = {"01 : Demo       ","02 : TETRIS     ","03 : Gomoku     "};
+const int8_t _mes_menu_select_app_list_1[3][20] PROGMEM = {"01 : Othero     ","02 : TETRIS     ","03 : Gomoku     "};
 
 
 void menu_init(void)
@@ -52,9 +52,9 @@ void menu_exec(uint8_t mode)
 	switch(mode)
 	{
 		case MENU_DEMO  : app_demo();  break;
-		case MENU_SOUND : app_sound(); break;
 		case MENU_GOMOKU: app_gomoku(); break;
 		case MENU_TETRIS : app_tetris(); break;
+		case MENU_OTHERO : app_othero(); break;
 	}
 }
 
@@ -62,7 +62,7 @@ void menu(void)
 {
 	strcpy_P(_mes_menu,_mes_menu_select_top_0);
 	lcd_put_data(0,_mes_menu);
-	strcpy_P(_mes_menu,_mes_menu_select_app_list_1[MENU_DEFAULT]);
+	strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
 	lcd_put_data(1,_mes_menu);
 	
 	sw_reset_disable();
@@ -94,43 +94,24 @@ void menu(void)
 
 		if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0))
 		{
-			if(menu_mode==MENU_DEMO)
+			if(menu_mode-1>=MENU_MIN)
 			{
-				menu_mode=MENU_TETRIS;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
+				menu_mode--;
 			}
-			else if(menu_mode==MENU_TETRIS)
+			else
 			{
-				menu_mode=MENU_GOMOKU;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
-			}
-			else if(menu_mode==MENU_GOMOKU)
-			{
-				menu_mode=MENU_DEMO;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
+				menu_mode = MENU_MAX;
 			}
 		}
 		else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0))
 		{
-			if(menu_mode==MENU_DEMO)
+			if(menu_mode+1<=MENU_MAX)
 			{
-				menu_mode=MENU_TETRIS;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
+				menu_mode++;
 			}
-			else if(menu_mode==MENU_TETRIS)
+			else
 			{
-				menu_mode=MENU_DEMO;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
-			}
-			else if(menu_mode==MENU_GOMOKU){
-				menu_mode=MENU_DEMO;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
+				menu_mode = MENU_MIN;
 			}
 		}
 		else if((switch_state_p0.switch_l==1)&&(switch_state_p0.switch_prev_l==0))
@@ -151,50 +132,36 @@ void menu(void)
 
 		if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0))
 		{
-			if(menu_mode==MENU_DEMO)
+			if(menu_mode-1>=MENU_MIN)
 			{
-				menu_mode=MENU_TETRIS;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
+				menu_mode--;
 			}
-			else if(menu_mode==MENU_TETRIS)
+			else
 			{
-				menu_mode=MENU_GOMOKU;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
-			}
-			else if(menu_mode==MENU_GOMOKU){
-				menu_mode=MENU_DEMO;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
+				menu_mode = MENU_MAX;
 			}
 		}
 		else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0))
 		{
-			if(menu_mode==MENU_DEMO)
+			if(menu_mode+1<=MENU_MAX)
 			{
-				menu_mode=MENU_TETRIS;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
+				menu_mode++;
 			}
-			else if(menu_mode==MENU_TETRIS)
+			else
 			{
-				menu_mode=MENU_GOMOKU;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
-			}
-			else if(menu_mode==MENU_GOMOKU)
-			{
-				menu_mode=MENU_DEMO;
-				strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
-				lcd_put_data(1,_mes_menu);
+				menu_mode = MENU_MIN;
 			}
 		}
 		else if((switch_state_p1.switch_l==1)&&(switch_state_p1.switch_prev_l==0))
 		{
 		}
 		else if((switch_state_p1.switch_r==1)&&(switch_state_p1.switch_prev_r==0))
-		  {
+		{
 		}
+
+		strcpy_P(_mes_menu,_mes_menu_select_top_0);
+		lcd_put_data(0,_mes_menu);
+		strcpy_P(_mes_menu,_mes_menu_select_app_list_1[menu_mode]);
+		lcd_put_data(1,_mes_menu);
 	}
 }

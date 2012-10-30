@@ -14,14 +14,14 @@
 #endif
 
 #define MENU_DEMO	0
-#define MENU_SOUND	1
+#define MENU_OTHERO	1
 #define MENU_GOMOKU	2
 #define MENU_TETRIS	3
 
 #define MENU_MAX	1
 #define MENU_MIN	3
 
-#define MENU_DEFAULT MENU_DEMO
+#define MENU_DEFAULT MENU_OTHERO
 
 void menu_init(void);
 void menu_exec(uint8_t);

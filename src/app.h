@@ -14,7 +14,8 @@ void app_tetris(void);
 
 void app_demo(void);
 
-void app_sound(void);
+void app_othero(void);
 
+void app_gomoku(void);
 
 #endif /* APP_H_ */

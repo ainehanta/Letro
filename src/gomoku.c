@@ -18,6 +18,21 @@
 
 void gomoku_init(void){
 
+	int x=0;
+	int y=0;
+	for(y=0;y<MAP_SIZE;y++)
+	{
+		for(x=0;x<MAP_SIZE;x++)
+		{
+			map[y][x] = 0;
+		}
+	}
+
+	iro = 1;
+	put_kaisuu = 0;
+	old_map = 0;
+	kaisuu = 1;
+
 	lcd_put_data(0,"Green turn      ");
 	led_start();
 

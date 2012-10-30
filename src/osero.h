@@ -3,14 +3,17 @@
 
 #define MAP_SIZE 16
 
-char map[MAP_SIZE][MAP_SIZE]={0};
-int map_x,map_y,idou,iro=1;
-int put_kaisuu=0;
+extern char map[MAP_SIZE][MAP_SIZE];
+extern int map_x;
+extern int map_y;
+extern int idou;
+extern int iro;
+extern int put_kaisuu;
 int i,i2;
 int map_xx,map_yy,map_xxx,map_yyy;
 int put_check;
-int old_map=0;
-int kaisuu=1;
+extern int old_map;
+extern int kaisuu;
 char lcd_bf[17];
 
 void map_idou(void);
