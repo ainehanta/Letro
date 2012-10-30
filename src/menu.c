@@ -38,7 +38,7 @@ int8_t _mes_menu[17];
 extern uint8_t _exit_flag;
 
 const int8_t _mes_menu_select_top_0[] PROGMEM = "Letro: SelectApp";
-const int8_t _mes_menu_select_app_list_1[3][20] PROGMEM = {"01 : Othero     ","02 : TETRIS     ","03 : Gomoku     "};
+const int8_t _mes_menu_select_app_list_1[4][20] PROGMEM = {"","01 : Othero     ","02 : Gomoku     ","03 : TETRIS     "};
 
 
 void menu_init(void)
@@ -94,7 +94,7 @@ void menu(void)
 
 		if((switch_state_p0.switch_u==1)&&(switch_state_p0.switch_prev_u==0))
 		{
-			if(menu_mode-1>=MENU_MIN)
+			if(menu_mode>=MENU_MIN)
 			{
 				menu_mode--;
 			}
@@ -105,7 +105,7 @@ void menu(void)
 		}
 		else if((switch_state_p0.switch_d==1)&&(switch_state_p0.switch_prev_d==0))
 		{
-			if(menu_mode+1<=MENU_MAX)
+			if(menu_mode<=MENU_MAX)
 			{
 				menu_mode++;
 			}
@@ -132,7 +132,7 @@ void menu(void)
 
 		if((switch_state_p1.switch_u==1)&&(switch_state_p1.switch_prev_u==0))
 		{
-			if(menu_mode-1>=MENU_MIN)
+			if(menu_mode>=MENU_MIN)
 			{
 				menu_mode--;
 			}
@@ -143,7 +143,7 @@ void menu(void)
 		}
 		else if((switch_state_p1.switch_d==1)&&(switch_state_p1.switch_prev_d==0))
 		{
-			if(menu_mode+1<=MENU_MAX)
+			if(menu_mode<=MENU_MAX)
 			{
 				menu_mode++;
 			}
