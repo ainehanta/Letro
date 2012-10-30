@@ -28,8 +28,14 @@
 #include "lcd.h"
 #include "led.h"
 #include "switch.h"
+#include "tetris.h"
 
 extern uint8_t _exit_flag;
+
+void app_tetris(void)
+{
+	call_tetris();
+}
 
 void app_demo(void)
 {	

@@ -1,7 +1,7 @@
 VPATH = ./src ./bin ./
 TARGET = Letro
 
-SRCS = app.c lcd.c led.c main.c menu.c sound.c switch.c swreset.c
+SRCS = app.c lcd.c led.c main.c menu.c sound.c switch.c swreset.c tetris.c
 OBJS = $(SRCS:.c=.o)
 OBJS_PATH = $(SRCS:%.c=$(DEST_DIR)/%.o)
 DEST_DIR = ./bin
@@ -10,17 +10,22 @@ GIT_DIR = D:\programming\github\Letro
 MCU = atmega1284p
 F_CPU = 16000000UL
 FUSES = FFFFFF #LOW HIGH EXTEND
+PROGRAMMER = atprogram
 
 OPT = 2
 CC = avr-gcc
 CFLAGS = -O$(OPT) -g -mmcu=$(MCU) -DF_CPU=$(F_CPU) -D_BUILD_
 OBJCOPY = avr-objcopy
 OBJCOPY_FLAGS = -O ihex -R .eeprom
-ATPROGRAM = atprogram
-ATPROGRAM_FLAGS = -t $(TARGET_TOOL) -i $(PROGRAM_INTERFACE) -v  
-PROGRAM_TOOL = avrdragon
-PROGRAM_INTERFACE = isp
 
+ATPROGRAM = atprogram
+ATPROGRAM_FLAGS = -t $(TARGET_TOOL) -i $(PROGRAM_INTERFACE) -v
+ATPROGRAM_TOOL = avrdragon
+ATPROGRAM_INTERFACE = isp
+
+AVRDUDE = avrdude
+AVRDUDE_FLAGS =
+AVRDUDE_TOOL = dragon_isp 
 
 .c.o : 
 	$(CC) $(CFLAGS) -c -o $(DEST_DIR)/$@ $<
@@ -56,5 +61,6 @@ menu.c : menu.h
 sound.c : sound.h
 switch.c : switch.h
 swreset.c : swreset.h
+tetris.c : tetris.h
 
 .PHONY : clean clean_o

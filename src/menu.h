@@ -14,7 +14,7 @@
 #endif
 
 #define MENU_DEMO	0
-#define MENU_SOUND	1
+#define MENU_TETRIS	1
 
 #define MENU_MAX	1
 #define MENU_MIN	2

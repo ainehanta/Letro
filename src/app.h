@@ -13,6 +13,8 @@
 	#include <avr/iom1284p.h>
 #endif
 
+void app_tetris(void);
+
 void app_demo(void);
 
 void app_sound(void);

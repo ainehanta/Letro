@@ -23,6 +23,8 @@
 #define R_W		PORTC5
 #define E		PORTC6
 
+// _BV(E) = (1 << 6) = 0b01000000
+
 #define LCD_PINS _BV(DB0) | _BV(DB1) | _BV(DB2) | _BV(DB3) | _BV(E) | _BV(RS) | _BV(R_W)
 #define LCD_PORT PORTC
 #define LCD_PIN	 PINC
