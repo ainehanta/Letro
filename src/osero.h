@@ -2,6 +2,7 @@
 #define OSERO_
 
 #define MAP_SIZE 16
+#define OSERO_MAP_SIZE 12
 
 extern char map[MAP_SIZE][MAP_SIZE];
 extern int map_x;
@@ -31,5 +32,7 @@ void osero_map_idou_up(void);
 void osero_map_idou_down(void);
 void osero_map_idou_put(void);
 void osero_map_idou_skip(void);
+
+void osero_win(void);
 
 #endif /* SWITCH_H_ */
