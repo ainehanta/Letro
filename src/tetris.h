@@ -1,5 +1,3 @@
-#define ENABLE_AVR
-
 #if !defined(HAS_CURSES)
 # define ENABLE_AVR
 #endif
@@ -7,6 +5,9 @@
 #if defined HAS_CURSES && defined ENABLE_AVR
 # error AVRとHAS_CURSESが両方共defineされています
 #endif
+
+#include <stdlib.h>
+#include <stdio.h>
 
 //AVR
 #if defined ENABLE_AVR
@@ -36,11 +37,11 @@
 #define LED_YELLOW			3
 
 
-#include <stdio.h>
 #include <signal.h>
 #include <ncurses.h>
 #include <time.h>
 #include <stdint.h>
+#include <unistd.h>
 
 typedef struct 
 {
