@@ -16,6 +16,7 @@
 #define MENU_DEMO	0
 #define MENU_SOUND	1
 #define MENU_GOMOKU	2
+#define MENU_TETRIS	3
 
 #define MENU_MAX	1
 #define MENU_MIN	3

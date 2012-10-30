@@ -10,6 +10,8 @@
 #define APP_H_
 
 
+void app_tetris(void);
+
 void app_demo(void);
 
 void app_sound(void);
